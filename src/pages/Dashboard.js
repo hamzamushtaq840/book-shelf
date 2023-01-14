@@ -17,7 +17,7 @@ function Dashboard() {
     const handleSugesstion = async (e) => {
         setQuery(e.target.value)
         setLoading(true)
-        const requestUri = `https://crossorigin.me/` + `https://www.goodreads.com/search/index.xml?key=FtRVHgmjzjpzKjCt3SUMw&q=${query}`;
+        const requestUri = `https://cors-anywhere.herokuapp.com/` + `https://www.goodreads.com/search/index.xml?key=FtRVHgmjzjpzKjCt3SUMw&q=${query}`;
         try {
             const res = await axios.get(requestUri);
             var xml = new XMLParser().parseFromString(res.data);
