@@ -88,15 +88,12 @@ const Login = () => {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <Link href="#" variant="body2">
-                        Forgot password?
-                    </Link>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 3 }}
                     >
                         Sign In
                     </Button>

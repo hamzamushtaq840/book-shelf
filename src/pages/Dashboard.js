@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Dashboard() {
+
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [loading, setLoading] = useState(false)
@@ -28,12 +29,15 @@ function Dashboard() {
             console.log(error);
             if (error.response.status === 429) {
                 setLoading(false)
-                toast.error("Too many attempts by try after 60min", { toastId: 1, position: toast.POSITION.TOP_RIGHT, });
+                toast.error("Too many attempts by localhost without cors", { toastId: 1, position: toast.POSITION.TOP_RIGHT, });
             }
         }
     }
 
     const handleSearch = () => {
+        if (suggestions.length === 0) {
+            return
+        }
         navigate("/Booklists", { state: { search: query } })
     }
 
@@ -42,9 +46,8 @@ function Dashboard() {
             <Navbar />
             <Container maxWidth={false} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '70vh' }}>
                 <Stack component="form" onSubmit={handleSearch} sx={{ backgroundColor: "white", width: '80%' }} direction='row' spacing={2} alignItems='center' >
-                    <Autocomplete disablePortal id="combo-box-demo" getOptionLabel={(suggestions) => `${suggestions.value}`} options={suggestions} loading={loading} fullWidth renderInput={(params) => <TextField required value={query}
-                        // onChange={(e) => setQuery(e.target.value)}
-                        onChange={(e) => handleSugesstion(e)}
+                    <Autocomplete onChange={(event, newValue) => setQuery(newValue.value)} disablePortal id="combo-box-demo" getOptionLabel={(suggestions) => `${suggestions.value}`} options={suggestions} loading={loading} fullWidth renderInput={(params) => <TextField required value={query}
+                        onChange={(e) => { setQuery(e.target.value); handleSugesstion(e) }}
                         label="Search" {...params} InputProps={{ ...params.InputProps, endAdornment: (<React.Fragment> {loading ? <CircularProgress color="inherit" size={20} /> : null} {params.InputProps.endAdornment} </React.Fragment>) }} />} />
                     <Button variant="contained" type="submit" color="primary" sx={{ py: 1.8 }} onClick={handleSearch}>
                         Search

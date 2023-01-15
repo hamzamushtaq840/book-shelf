@@ -2,14 +2,11 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/m
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function BookItem({ name, image, item }) {
+function BookItem({ name, image, item, id }) {
     const navigate = useNavigate()
 
     const handleSingleItem = () => {
-        let obj1 = [{
-            id: 19
-        },]
-        navigate('/Bookdetail', { state: { name: item.children[1].value, author: item.children[2].children[1].value, image: item.children[3].value, obj: obj1 } })
+        navigate('/Bookdetail', { state: { id: item.children[0].value } })
     }
 
     return (
