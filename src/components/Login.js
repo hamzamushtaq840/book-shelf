@@ -17,6 +17,8 @@ const Login = () => {
     const users = JSON.parse(localStorage.getItem('users')) || {}
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    console.log('Hello')
+
 
 
     const handleSubmit = (event) => {
